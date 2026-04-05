@@ -33,7 +33,8 @@ TEST_TARGETS = \
 	$(BIN_DIR)/test_rules_category \
 	$(BIN_DIR)/test_performance \
 	$(BIN_DIR)/test_functionality \
-	$(BIN_DIR)/test_edge_cases
+	$(BIN_DIR)/test_edge_cases \
+	$(BIN_DIR)/test_integration
 
 # Test sources
 TEST_BASIC_COMPILE_SRC = $(SRC_DIR)/test_basic_compile.cpp
@@ -48,6 +49,7 @@ TEST_RULES_CATEGORY_SRC = $(SRC_DIR)/test_rules_category.cpp
 TEST_PERFORMANCE_SRC = $(SRC_DIR)/test_performance.cpp
 TEST_FUNCTIONALITY_SRC = $(SRC_DIR)/test_functionality.cpp
 TEST_EDGE_CASES_SRC = $(SRC_DIR)/test_edge_cases.cpp
+TEST_INTEGRATION_SRC = $(SRC_DIR)/test_integration.cpp
 
 # Default target
 all: $(BIN_DIR) $(DEMO_TARGET) $(TEST_TARGETS)
@@ -102,6 +104,9 @@ $(BIN_DIR)/test_functionality: $(TEST_FUNCTIONALITY_SRC) | $(BIN_DIR)
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -o $@ $< $(LDFLAGS)
 
 $(BIN_DIR)/test_edge_cases: $(TEST_EDGE_CASES_SRC) | $(BIN_DIR)
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -o $@ $< $(LDFLAGS)
+
+$(BIN_DIR)/test_integration: $(TEST_INTEGRATION_SRC) | $(BIN_DIR)
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -o $@ $< $(LDFLAGS)
 
 # Run all tests
@@ -171,6 +176,9 @@ test-functionality: $(BIN_DIR)/test_functionality
 test-edge-cases: $(BIN_DIR)/test_edge_cases
 	./$(BIN_DIR)/test_edge_cases
 
+test-integration: $(BIN_DIR)/test_integration
+	./$(BIN_DIR)/test_integration
+
 # Run demo
 run: $(DEMO_TARGET)
 	./$(DEMO_TARGET)
@@ -209,6 +217,7 @@ help:
 	@echo "  test-performance - Run performance tests"
 	@echo "  test-functionality - Run functionality tests"
 	@echo "  test-edge-cases - Run edge cases tests"
+	@echo "  test-integration - Run integration tests"
 	@echo "  run              - Build and run the demo"
 	@echo "  clean            - Remove build artifacts"
 	@echo "  clean-all        - Remove all generated files"

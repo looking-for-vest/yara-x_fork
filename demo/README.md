@@ -118,6 +118,12 @@ The demo includes a comprehensive test suite that validates all major YARA-X CAP
    - Stress testing
    - Memory usage
 
+8. **test_integration.cpp**
+   - Malware sample scanning
+   - Malicious document scanning
+   - WebShell sample scanning
+   - Real-world rule testing
+
 ### Test Results
 
 The test suite runs 172 test cases covering all major CAPI functionality, ensuring the library is working correctly for integration into other C++ projects.
