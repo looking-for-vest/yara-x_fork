@@ -10,6 +10,7 @@ This demo demonstrates how to use the YARA-X CAPI library in C++ with multi-thre
 4. **Callback Functions**: Handle matching rules with custom callbacks
 5. **Timeout Support**: Set scan timeouts to prevent long-running scans
 6. **Thread Safety**: Demonstrate thread-safe usage patterns
+7. **Comprehensive Test Suite**: Validate all major CAPI functionality
 
 ## Building the Demo
 
@@ -25,7 +26,7 @@ This demo demonstrates how to use the YARA-X CAPI library in C++ with multi-thre
 make
 ```
 
-This will compile the demo program using the Makefile.
+This will compile the demo program and all test cases using the Makefile.
 
 ## Running the Demo
 
@@ -36,8 +37,16 @@ make run
 Or directly:
 
 ```bash
-./demo_multithread
+./bin/demo_multithread
 ```
+
+## Running the Test Suite
+
+```bash
+make test
+```
+
+This will run all test cases and show the results.
 
 ## Demo Output Explanation
 
@@ -62,6 +71,56 @@ The demo performs the following steps:
 5. **Timeout Functionality**: Shows how to create a scanner with timeout
 
 6. **Cleanup**: Properly destroys all resources
+
+## Test Suite
+
+The demo includes a comprehensive test suite that validates all major YARA-X CAPI functionality:
+
+### Test Modules
+
+1. **test_basic_compile.cpp**
+   - Basic rule compilation
+   - Compiler lifecycle
+   - Multi-rule compilation
+   - Namespaces
+   - File loading and includes
+
+2. **test_patterns.cpp**
+   - String patterns (case-insensitive, wide, fullword)
+   - Hex patterns (with jumps and wildcards)
+   - Regex patterns
+   - Pattern matching conditions
+
+3. **test_metadata.cpp**
+   - String, integer, float, and boolean metadata
+   - Metadata iteration
+   - Tags
+
+4. **test_globals.cpp**
+   - Global variables (bool, int, float, string, JSON)
+   - Scanner-level global variables
+
+5. **test_serialization.cpp**
+   - Rule serialization and deserialization
+   - Metadata preservation
+   - Large rule sets
+
+6. **test_error_handling.cpp**
+   - Syntax errors
+   - Unknown identifiers
+   - Invalid arguments
+   - Error message retrieval
+   - JSON error output
+
+7. **test_memory.cpp**
+   - Resource lifecycle management
+   - Multi-threaded scanning
+   - Stress testing
+   - Memory usage
+
+### Test Results
+
+The test suite runs 172 test cases covering all major CAPI functionality, ensuring the library is working correctly for integration into other C++ projects.
 
 ## Key API Concepts
 
@@ -112,6 +171,8 @@ The demo uses:
 ### Rules Management
 - `yrx_rules_count()`: Get number of rules
 - `yrx_rules_destroy()`: Destroy rules
+- `yrx_rules_serialize()`: Serialize rules to buffer
+- `yrx_rules_deserialize()`: Deserialize rules from buffer
 
 ### Scanner Operations
 - `yrx_scanner_create()`: Create a scanner from rules
@@ -124,13 +185,28 @@ The demo uses:
 - `yrx_rule_identifier()`: Get rule name
 - `yrx_rule_namespace()`: Get rule namespace
 - `yrx_rule_iter_patterns()`: Iterate over patterns in a rule
+- `yrx_rule_iter_metadata()`: Iterate over metadata in a rule
+- `yrx_rule_iter_tags()`: Iterate over tags in a rule
 
 ### Pattern Information
 - `yrx_pattern_identifier()`: Get pattern name
 - `yrx_pattern_iter_matches()`: Iterate over pattern matches
 
+### Global Variables
+- `yrx_compiler_define_global_bool()`: Define boolean global variable
+- `yrx_compiler_define_global_int()`: Define integer global variable
+- `yrx_compiler_define_global_float()`: Define float global variable
+- `yrx_compiler_define_global_string()`: Define string global variable
+- `yrx_compiler_define_global_json()`: Define JSON global variable
+- `yrx_scanner_set_global_bool()`: Set scanner-level boolean global
+- `yrx_scanner_set_global_int()`: Set scanner-level integer global
+- `yrx_scanner_set_global_float()`: Set scanner-level float global
+- `yrx_scanner_set_global_string()`: Set scanner-level string global
+
 ### Error Handling
 - `yrx_last_error()`: Get last error message
+- `yrx_compiler_errors_json()`: Get compiler errors as JSON
+- `yrx_compiler_warnings_json()`: Get compiler warnings as JSON
 
 ## Makefile Details
 
@@ -138,6 +214,7 @@ The Makefile includes:
 - Proper library paths and includes
 - Runtime library path (rpath) for easy execution
 - Clean and run targets
+- Test targets for all test cases
 - All necessary dependencies (pthread, dl, m)
 
 ## Troubleshooting
@@ -168,8 +245,8 @@ Ensure:
 
 1. Add file scanning with `yrx_scanner_scan_file()`
 2. Implement block scanning for large files
-3. Add rule serialization/deserialization
-4. Implement custom metadata handling
+3. Add rule serialization/deserialization (already tested)
+4. Implement custom metadata handling (already tested)
 5. Add module support (PE, ELF, etc.)
 6. Implement profiling with `yrx_scanner_iter_slowest_rules()`
 
