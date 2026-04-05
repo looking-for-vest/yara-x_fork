@@ -1,0 +1,6 @@
+Hello World!
+This is a test file for YARA-X CAPI testing.
+It contains patterns like: test_pattern_example
+Email addresses: test@example.com
+Numbers: 12345
+Special characters: !@#$%^&*()
