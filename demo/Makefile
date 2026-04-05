@@ -28,7 +28,12 @@ TEST_TARGETS = \
 	$(BIN_DIR)/test_globals \
 	$(BIN_DIR)/test_serialization \
 	$(BIN_DIR)/test_error_handling \
-	$(BIN_DIR)/test_memory
+	$(BIN_DIR)/test_memory \
+	$(BIN_DIR)/test_rules_load \
+	$(BIN_DIR)/test_rules_category \
+	$(BIN_DIR)/test_performance \
+	$(BIN_DIR)/test_functionality \
+	$(BIN_DIR)/test_edge_cases
 
 # Test sources
 TEST_BASIC_COMPILE_SRC = $(SRC_DIR)/test_basic_compile.cpp
@@ -38,6 +43,11 @@ TEST_GLOBALS_SRC = $(SRC_DIR)/test_globals.cpp
 TEST_SERIALIZATION_SRC = $(SRC_DIR)/test_serialization.cpp
 TEST_ERROR_HANDLING_SRC = $(SRC_DIR)/test_error_handling.cpp
 TEST_MEMORY_SRC = $(SRC_DIR)/test_memory.cpp
+TEST_RULES_LOAD_SRC = $(SRC_DIR)/test_rules_load.cpp
+TEST_RULES_CATEGORY_SRC = $(SRC_DIR)/test_rules_category.cpp
+TEST_PERFORMANCE_SRC = $(SRC_DIR)/test_performance.cpp
+TEST_FUNCTIONALITY_SRC = $(SRC_DIR)/test_functionality.cpp
+TEST_EDGE_CASES_SRC = $(SRC_DIR)/test_edge_cases.cpp
 
 # Default target
 all: $(BIN_DIR) $(DEMO_TARGET) $(TEST_TARGETS)
@@ -77,6 +87,21 @@ $(BIN_DIR)/test_error_handling: $(TEST_ERROR_HANDLING_SRC) | $(BIN_DIR)
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -o $@ $< $(LDFLAGS)
 
 $(BIN_DIR)/test_memory: $(TEST_MEMORY_SRC) | $(BIN_DIR)
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -o $@ $< $(LDFLAGS)
+
+$(BIN_DIR)/test_rules_load: $(TEST_RULES_LOAD_SRC) | $(BIN_DIR)
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -o $@ $< $(LDFLAGS)
+
+$(BIN_DIR)/test_rules_category: $(TEST_RULES_CATEGORY_SRC) | $(BIN_DIR)
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -o $@ $< $(LDFLAGS)
+
+$(BIN_DIR)/test_performance: $(TEST_PERFORMANCE_SRC) | $(BIN_DIR)
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -o $@ $< $(LDFLAGS)
+
+$(BIN_DIR)/test_functionality: $(TEST_FUNCTIONALITY_SRC) | $(BIN_DIR)
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -o $@ $< $(LDFLAGS)
+
+$(BIN_DIR)/test_edge_cases: $(TEST_EDGE_CASES_SRC) | $(BIN_DIR)
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -o $@ $< $(LDFLAGS)
 
 # Run all tests
@@ -131,6 +156,21 @@ test-error: $(BIN_DIR)/test_error_handling
 test-memory: $(BIN_DIR)/test_memory
 	./$(BIN_DIR)/test_memory
 
+test-rules-load: $(BIN_DIR)/test_rules_load
+	./$(BIN_DIR)/test_rules_load
+
+test-rules-category: $(BIN_DIR)/test_rules_category
+	./$(BIN_DIR)/test_rules_category
+
+test-performance: $(BIN_DIR)/test_performance
+	./$(BIN_DIR)/test_performance
+
+test-functionality: $(BIN_DIR)/test_functionality
+	./$(BIN_DIR)/test_functionality
+
+test-edge-cases: $(BIN_DIR)/test_edge_cases
+	./$(BIN_DIR)/test_edge_cases
+
 # Run demo
 run: $(DEMO_TARGET)
 	./$(DEMO_TARGET)
@@ -164,6 +204,11 @@ help:
 	@echo "  test-serialization - Run serialization tests"
 	@echo "  test-error       - Run error handling tests"
 	@echo "  test-memory      - Run memory management tests"
+	@echo "  test-rules-load  - Run rules load and compilation tests"
+	@echo "  test-rules-category - Run rules category tests"
+	@echo "  test-performance - Run performance tests"
+	@echo "  test-functionality - Run functionality tests"
+	@echo "  test-edge-cases - Run edge cases tests"
 	@echo "  run              - Build and run the demo"
 	@echo "  clean            - Remove build artifacts"
 	@echo "  clean-all        - Remove all generated files"
@@ -178,4 +223,4 @@ help:
 	@echo "  tests/rules/     - Test YARA rule files"
 	@echo "  tests/data/      - Test data files"
 
-.PHONY: all test test-basic test-patterns test-metadata test-globals test-serialization test-error test-memory run clean clean-all show-structure help
+.PHONY: all test test-basic test-patterns test-metadata test-globals test-serialization test-error test-memory test-rules-load test-rules-category test-performance test-functionality test-edge-cases run clean clean-all show-structure help
