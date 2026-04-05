@@ -123,6 +123,7 @@ test: $(TEST_TARGETS)
 		echo "----------------------------------------"; \
 		if $$test; then \
 			echo "Test $$test PASSED"; \
+			total_passed=$$((total_passed + 1)); \
 		else \
 			echo "Test $$test FAILED"; \
 			total_failed=$$((total_failed + 1)); \
@@ -132,6 +133,9 @@ test: $(TEST_TARGETS)
 	echo "========================================"; \
 	echo "  Test Suite Summary"; \
 	echo "========================================"; \
+	echo "  Total tests: $$(($$total_passed + $$total_failed))"; \
+	echo "  Passed: $$total_passed"; \
+	echo "  Failed: $$total_failed"; \
 	if [ $$total_failed -eq 0 ]; then \
 		echo "  All tests PASSED!"; \
 	else \
