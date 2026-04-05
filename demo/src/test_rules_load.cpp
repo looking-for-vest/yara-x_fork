@@ -56,7 +56,7 @@ void test_single_rule_load() {
     std::cout << "\n=== Test: Single Rule Load ===" << std::endl;
     
     // 测试单个规则文件
-    std::string rule_path = "/home/secneo/quanqing/mygithub/yara-x_fork/demo/tests/Yara-Rules/rules/malware/MALW_Emotet.yar";
+    std::string rule_path = "./tests/Yara-Rules/rules/malware/MALW_Emotet.yar";
     std::string rule_content = read_file(rule_path);
     
     TEST_ASSERT(!rule_content.empty(), "Read rule file");
@@ -94,7 +94,7 @@ void test_index_file_load() {
     std::cout << "\n=== Test: Index File Load ===" << std::endl;
     
     // 测试索引文件
-    std::string index_path = "/home/secneo/quanqing/mygithub/yara-x_fork/demo/tests/Yara-Rules/rules/index.yar";
+    std::string index_path = "./tests/Yara-Rules/rules/index.yar";
     std::string index_content = read_file(index_path);
     
     TEST_ASSERT(!index_content.empty(), "Read index file");
@@ -105,7 +105,7 @@ void test_index_file_load() {
     
     if (compiler) {
         // 设置包含路径
-        result = yrx_compiler_add_include_dir(compiler, "/home/secneo/quanqing/mygithub/yara-x_fork/demo/tests/Yara-Rules/rules");
+        result = yrx_compiler_add_include_dir(compiler, "./tests/Yara-Rules/rules");
         
         // 添加索引文件
         result = yrx_compiler_add_source(compiler, index_content.c_str());
@@ -141,7 +141,7 @@ void test_include_directive() {
     
     // 测试包含指令
     std::string test_rule = R"(
-        include "/home/secneo/quanqing/mygithub/yara-x_fork/demo/tests/rules/includes/included.yar"
+        include "./tests/rules/includes/included.yar"
         
         rule test_include {
             condition:
@@ -178,7 +178,7 @@ void test_compiler_include_path() {
     
     if (compiler) {
         // 设置包含路径
-        result = yrx_compiler_add_include_dir(compiler, "/home/secneo/quanqing/mygithub/yara-x_fork/demo/tests/rules/includes");
+        result = yrx_compiler_add_include_dir(compiler, "./tests/rules/includes");
         TEST_ASSERT(result == YRX_SUCCESS, "Add include path");
         
         // 使用相对路径包含
@@ -217,7 +217,7 @@ void test_ruleset_compilation() {
     std::cout << "\n=== Test: Full Ruleset Compilation ===" << std::endl;
     
     // 测试完整规则集编译
-    std::string index_path = "/home/secneo/quanqing/mygithub/yara-x_fork/demo/tests/Yara-Rules/rules/index.yar";
+    std::string index_path = "./tests/Yara-Rules/rules/index.yar";
     std::string index_content = read_file(index_path);
     
     TEST_ASSERT(!index_content.empty(), "Read full ruleset index");
@@ -228,7 +228,7 @@ void test_ruleset_compilation() {
     
     if (compiler) {
         // 设置包含路径
-        result = yrx_compiler_add_include_dir(compiler, "/home/secneo/quanqing/mygithub/yara-x_fork/demo/tests/Yara-Rules/rules");
+        result = yrx_compiler_add_include_dir(compiler, "./tests/Yara-Rules/rules");
         TEST_ASSERT(result == YRX_SUCCESS, "Add rules directory as include path");
         
         // 编译索引文件

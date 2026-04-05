@@ -39,9 +39,9 @@ void test_category_malware() {
     std::cout << "\n=== Test: Malware Category ===" << std::endl;
     
     std::vector<std::string> malware_rules = {
-        "/home/secneo/quanqing/mygithub/yara-x_fork/demo/tests/Yara-Rules/rules/malware/MALW_Emotet.yar",
-        "/home/secneo/quanqing/mygithub/yara-x_fork/demo/tests/Yara-Rules/rules/malware/MALW_Mirai.yar",
-        "/home/secneo/quanqing/mygithub/yara-x_fork/demo/tests/Yara-Rules/rules/malware/APT_Stuxnet.yar"
+        "./tests/Yara-Rules/rules/malware/MALW_Emotet.yar",
+        "./tests/Yara-Rules/rules/malware/MALW_Mirai.yar",
+        "./tests/Yara-Rules/rules/malware/APT_Stuxnet.yar"
     };
     
     for (const auto& rule_path : malware_rules) {
@@ -72,9 +72,9 @@ void test_category_maldocs() {
     std::cout << "\n=== Test: Malicious Documents Category ===" << std::endl;
     
     std::vector<std::string> maldoc_rules = {
-        "/home/secneo/quanqing/mygithub/yara-x_fork/demo/tests/Yara-Rules/rules/maldocs/Maldoc_PDF.yar",
-        "/home/secneo/quanqing/mygithub/yara-x_fork/demo/tests/Yara-Rules/rules/maldocs/Maldoc_VBA_macro_code.yar",
-        "/home/secneo/quanqing/mygithub/yara-x_fork/demo/tests/Yara-Rules/rules/maldocs/Maldoc_DDE.yar"
+        "./tests/Yara-Rules/rules/maldocs/Maldoc_PDF.yar",
+        "./tests/Yara-Rules/rules/maldocs/Maldoc_VBA_macro_code.yar",
+        "./tests/Yara-Rules/rules/maldocs/Maldoc_DDE.yar"
     };
     
     for (const auto& rule_path : maldoc_rules) {
@@ -104,7 +104,7 @@ void test_category_maldocs() {
 void test_category_webshells() {
     std::cout << "\n=== Test: WebShells Category ===" << std::endl;
     
-    std::string webshells_index = "/home/secneo/quanqing/mygithub/yara-x_fork/demo/tests/Yara-Rules/rules/webshells_index.yar";
+    std::string webshells_index = "./tests/Yara-Rules/rules/webshells_index.yar";
     std::string content = read_file(webshells_index);
     
     if (!content.empty()) {
@@ -128,7 +128,7 @@ void test_category_webshells() {
 void test_category_packers() {
     std::cout << "\n=== Test: Packers Category ===" << std::endl;
     
-    std::string packers_index = "/home/secneo/quanqing/mygithub/yara-x_fork/demo/tests/Yara-Rules/rules/packers_index.yar";
+    std::string packers_index = "./tests/Yara-Rules/rules/packers_index.yar";
     std::string content = read_file(packers_index);
     
     if (!content.empty()) {
@@ -152,7 +152,7 @@ void test_category_packers() {
 void test_category_crypto() {
     std::cout << "\n=== Test: Crypto Category ===" << std::endl;
     
-    std::string crypto_index = "/home/secneo/quanqing/mygithub/yara-x_fork/demo/tests/Yara-Rules/rules/crypto_index.yar";
+    std::string crypto_index = "./tests/Yara-Rules/rules/crypto_index.yar";
     std::string content = read_file(crypto_index);
     
     if (!content.empty()) {
@@ -176,7 +176,7 @@ void test_category_crypto() {
 void test_category_cve() {
     std::cout << "\n=== Test: CVE Rules Category ===" << std::endl;
     
-    std::string cve_index = "/home/secneo/quanqing/mygithub/yara-x_fork/demo/tests/Yara-Rules/rules/cve_rules_index.yar";
+    std::string cve_index = "./tests/Yara-Rules/rules/cve_rules_index.yar";
     std::string content = read_file(cve_index);
     
     if (!content.empty()) {
@@ -200,7 +200,7 @@ void test_category_cve() {
 void test_category_antidebug() {
     std::cout << "\n=== Test: Anti-debug/Anti-VM Category ===" << std::endl;
     
-    std::string antidebug_rule = "/home/secneo/quanqing/mygithub/yara-x_fork/demo/tests/Yara-Rules/rules/antidebug_antivm/antidebug_antivm.yar";
+    std::string antidebug_rule = "./tests/Yara-Rules/rules/antidebug_antivm/antidebug_antivm.yar";
     std::string content = read_file(antidebug_rule);
     
     if (!content.empty()) {
@@ -224,7 +224,7 @@ void test_category_antidebug() {
 void test_category_capabilities() {
     std::cout << "\n=== Test: Capabilities Category ===" << std::endl;
     
-    std::string capabilities_rule = "/home/secneo/quanqing/mygithub/yara-x_fork/demo/tests/Yara-Rules/rules/capabilities/capabilities.yar";
+    std::string capabilities_rule = "./tests/Yara-Rules/rules/capabilities/capabilities.yar";
     std::string content = read_file(capabilities_rule);
     
     if (!content.empty()) {

@@ -59,7 +59,7 @@ void test_malware_samples() {
     std::cout << "\n=== Test: Malware Samples ===" << std::endl;
     
     // 测试恶意软件样本
-    std::string malware_rule_path = "/home/secneo/quanqing/mygithub/yara-x_fork/demo/tests/Yara-Rules/rules/malware/MALW_Emotet.yar";
+    std::string malware_rule_path = "./tests/Yara-Rules/rules/malware/MALW_Emotet.yar";
     std::string rule_content = read_file(malware_rule_path);
     
     TEST_ASSERT(!rule_content.empty(), "Read malware rule file");
@@ -71,7 +71,7 @@ void test_malware_samples() {
         TEST_ASSERT(rules != nullptr, "Compile malware rules");
         
         // 测试样本目录
-        std::string samples_dir = "/home/secneo/quanqing/mygithub/yara-x_fork/demo/tests/samples";
+        std::string samples_dir = "./tests/samples";
         
         if (fs::exists(samples_dir) && fs::is_directory(samples_dir)) {
             for (const auto& entry : fs::directory_iterator(samples_dir)) {
@@ -123,7 +123,7 @@ void test_maldoc_samples() {
     std::cout << "\n=== Test: Malicious Document Samples ===" << std::endl;
     
     // 测试恶意文档样本
-    std::string maldoc_rule_path = "/home/secneo/quanqing/mygithub/yara-x_fork/demo/tests/Yara-Rules/rules/maldocs/Maldoc_PDF.yar";
+    std::string maldoc_rule_path = "./tests/Yara-Rules/rules/maldocs/Maldoc_PDF.yar";
     std::string rule_content = read_file(maldoc_rule_path);
     
     TEST_ASSERT(!rule_content.empty(), "Read maldoc rule file");
@@ -229,9 +229,9 @@ void test_real_world_rules() {
     
     // 测试真实世界的规则
     std::vector<std::string> rule_files = {
-        "/home/secneo/quanqing/mygithub/yara-x_fork/demo/tests/Yara-Rules/rules/malware/MALW_Mirai.yar",
-        "/home/secneo/quanqing/mygithub/yara-x_fork/demo/tests/Yara-Rules/rules/antidebug_antivm/antidebug_antivm.yar",
-        "/home/secneo/quanqing/mygithub/yara-x_fork/demo/tests/Yara-Rules/rules/capabilities/capabilities.yar"
+        "./tests/Yara-Rules/rules/malware/MALW_Mirai.yar",
+        "./tests/Yara-Rules/rules/antidebug_antivm/antidebug_antivm.yar",
+        "./tests/Yara-Rules/rules/capabilities/capabilities.yar"
     };
     
     for (const auto& rule_path : rule_files) {

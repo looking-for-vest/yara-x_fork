@@ -102,9 +102,9 @@ void test_malware_category() {
     
     // 恶意软件规则文件列表
     std::vector<std::string> malware_rules = {
-        "/home/secneo/quanqing/mygithub/yara-x_fork/demo/tests/Yara-Rules/rules/malware/MALW_Emotet.yar",
-        "/home/secneo/quanqing/mygithub/yara-x_fork/demo/tests/Yara-Rules/rules/malware/MALW_Mirai.yar",
-        "/home/secneo/quanqing/mygithub/yara-x_fork/demo/tests/Yara-Rules/rules/malware/APT_Stuxnet.yar"
+        "./tests/Yara-Rules/rules/malware/MALW_Emotet.yar",
+        "./tests/Yara-Rules/rules/malware/MALW_Mirai.yar",
+        "./tests/Yara-Rules/rules/malware/APT_Stuxnet.yar"
     };
     
     // 遍历测试每个规则文件
@@ -144,9 +144,9 @@ void test_maldoc_category() {
     
     // 恶意文档规则文件列表
     std::vector<std::string> maldoc_rules = {
-        "/home/secneo/quanqing/mygithub/yara-x_fork/demo/tests/Yara-Rules/rules/maldocs/Maldoc_PDF.yar",
-        "/home/secneo/quanqing/mygithub/yara-x_fork/demo/tests/Yara-Rules/rules/maldocs/Maldoc_VBA_macro_code.yar",
-        "/home/secneo/quanqing/mygithub/yara-x_fork/demo/tests/Yara-Rules/rules/maldocs/Maldoc_DDE.yar"
+        "./tests/Yara-Rules/rules/maldocs/Maldoc_PDF.yar",
+        "./tests/Yara-Rules/rules/maldocs/Maldoc_VBA_macro_code.yar",
+        "./tests/Yara-Rules/rules/maldocs/Maldoc_DDE.yar"
     };
     
     // 遍历测试每个规则文件
