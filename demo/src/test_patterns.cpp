@@ -41,8 +41,6 @@ void rule_callback(const YRX_RULE* rule, void* user_data) {
 }
 
 void pattern_callback(const YRX_PATTERN* pattern, void* user_data) {
-    ScanResult* result = static_cast<ScanResult*>(user_data);
-    
     auto match_callback = [](const YRX_MATCH* match, void* user_data) {
         ScanResult* result = static_cast<ScanResult*>(user_data);
         result->match_offsets.push_back({match->offset, match->length});
@@ -53,7 +51,7 @@ void pattern_callback(const YRX_PATTERN* pattern, void* user_data) {
 
 YRX_RULES* compile_rule(const char* rule) {
     YRX_RULES* rules = nullptr;
-    YRX_RESULT result = yrx_compile(rule, &rules);
+    yrx_compile(rule, &rules);
     return rules;
 }
 
@@ -464,17 +462,6 @@ void test_match_offset_length() {
         ScanResult scan_result = {0, {}, {}};
         YRX_SCANNER* scanner = nullptr;
         yrx_scanner_create(rules, &scanner);
-        
-        auto pattern_cb = [](const YRX_PATTERN* pattern, void* user_data) {
-            ScanResult* result = static_cast<ScanResult*>(user_data);
-            
-            auto match_cb = [](const YRX_MATCH* match, void* user_data) {
-                ScanResult* result = static_cast<ScanResult*>(user_data);
-                result->match_offsets.push_back({match->offset, match->length});
-            };
-            
-            yrx_pattern_iter_matches(pattern, match_cb, user_data);
-        };
         
         yrx_scanner_on_matching_rule(scanner, rule_callback, &scan_result);
         
