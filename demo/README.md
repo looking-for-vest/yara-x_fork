@@ -124,9 +124,16 @@ The demo includes a comprehensive test suite that validates all major YARA-X CAP
    - WebShell sample scanning
    - Real-world rule testing
 
+9. **test_file_formats.cpp**
+   - PE module testing (Windows executable files)
+   - ELF module testing (Linux executable files)
+   - Mach-O module testing (macOS executable files)
+   - CRX module testing (Chrome extension files)
+   - LNK module testing (Windows shortcut files)
+
 ### Test Results
 
-The test suite runs 172 test cases covering all major CAPI functionality, ensuring the library is working correctly for integration into other C++ projects.
+The test suite runs 189 test cases covering all major CAPI functionality, including file format modules, ensuring the library is working correctly for integration into other C++ projects.
 
 ## Key API Concepts
 
