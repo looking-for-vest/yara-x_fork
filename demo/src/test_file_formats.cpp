@@ -40,8 +40,28 @@ void rule_callback(const YRX_RULE* rule, void* user_data) {
 }
 
 YRX_RULES* compile_rule(const char* rule) {
+    YRX_COMPILER* compiler = nullptr;
     YRX_RULES* rules = nullptr;
-    yrx_compile(rule, &rules);
+    
+    // 创建编译器
+    if (yrx_compiler_create(0, &compiler) != YRX_SUCCESS) {
+        std::cout << "  [ERROR] Create compiler failed: " << yrx_last_error() << std::endl;
+        return nullptr;
+    }
+    
+    // 添加规则源码
+    if (yrx_compiler_add_source(compiler, rule) != YRX_SUCCESS) {
+        std::cout << "  [ERROR] Add source failed: " << yrx_last_error() << std::endl;
+        yrx_compiler_destroy(compiler);
+        return nullptr;
+    }
+    
+    // 构建规则
+    rules = yrx_compiler_build(compiler);
+    
+    // 销毁编译器
+    yrx_compiler_destroy(compiler);
+    
     return rules;
 }
 
@@ -62,16 +82,18 @@ ScanResult scan_data(YRX_RULES* rules, const uint8_t* data, size_t len) {
 void test_pe_module() {
     std::cout << "\n=== Test: PE Module ===" << std::endl;
     
-    // 测试PE模块的基本功能
+    // 测试PE模块的is_pe字段
     const char* rule = R"(
+        import "pe"
+        
         rule pe_test {
             condition:
-                true
+                pe.is_pe
         }
     )";
     
     YRX_RULES* rules = compile_rule(rule);
-    TEST_ASSERT(rules != nullptr, "Compile basic rule");
+    TEST_ASSERT(rules != nullptr, "Compile PE module rule");
     
     if (rules) {
         // 创建一个简单的PE文件头模拟数据
@@ -99,16 +121,18 @@ void test_pe_module() {
 void test_elf_module() {
     std::cout << "\n=== Test: ELF Module ===" << std::endl;
     
-    // 测试ELF模块的基本功能
+    // 测试ELF模块的基本功能（检查type字段是否存在）
     const char* rule = R"(
+        import "elf"
+        
         rule elf_test {
             condition:
-                true
+                elf.type
         }
     )";
     
     YRX_RULES* rules = compile_rule(rule);
-    TEST_ASSERT(rules != nullptr, "Compile basic rule");
+    TEST_ASSERT(rules != nullptr, "Compile ELF module rule");
     
     if (rules) {
         // 创建一个简单的ELF文件头模拟数据
@@ -142,16 +166,18 @@ void test_elf_module() {
 void test_macho_module() {
     std::cout << "\n=== Test: Mach-O Module ===" << std::endl;
     
-    // 测试Mach-O模块的基本功能
+    // 测试Mach-O模块的基本功能（检查magic字段是否存在）
     const char* rule = R"(
+        import "macho"
+        
         rule macho_test {
             condition:
-                true
+                macho.magic
         }
     )";
     
     YRX_RULES* rules = compile_rule(rule);
-    TEST_ASSERT(rules != nullptr, "Compile basic rule");
+    TEST_ASSERT(rules != nullptr, "Compile Mach-O module rule");
     
     if (rules) {
         // 创建一个简单的Mach-O文件头模拟数据 (64-bit)
@@ -177,16 +203,18 @@ void test_macho_module() {
 void test_crx_module() {
     std::cout << "\n=== Test: CRX Module ===" << std::endl;
     
-    // 测试CRX模块的基本功能
+    // 测试CRX模块的is_crx字段
     const char* rule = R"(
+        import "crx"
+        
         rule crx_test {
             condition:
-                true
+                crx.is_crx
         }
     )";
     
     YRX_RULES* rules = compile_rule(rule);
-    TEST_ASSERT(rules != nullptr, "Compile basic rule");
+    TEST_ASSERT(rules != nullptr, "Compile CRX module rule");
     
     if (rules) {
         // 创建一个简单的CRX文件头模拟数据
@@ -209,16 +237,18 @@ void test_crx_module() {
 void test_lnk_module() {
     std::cout << "\n=== Test: LNK Module ===" << std::endl;
     
-    // 测试LNK模块的基本功能
+    // 测试LNK模块的is_lnk字段
     const char* rule = R"(
+        import "lnk"
+        
         rule lnk_test {
             condition:
-                true
+                lnk.is_lnk
         }
     )";
     
     YRX_RULES* rules = compile_rule(rule);
-    TEST_ASSERT(rules != nullptr, "Compile basic rule");
+    TEST_ASSERT(rules != nullptr, "Compile LNK module rule");
     
     if (rules) {
         // 创建一个简单的LNK文件头模拟数据
