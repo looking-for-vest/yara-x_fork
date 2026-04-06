@@ -21,20 +21,7 @@ DEMO_TARGET = $(BIN_DIR)/demo_multithread
 DEMO_SOURCES = $(SRC_DIR)/demo_multithread.cpp
 
 # Test targets
-TEST_TARGETS = \
-	$(BIN_DIR)/test_basic_compile \
-	$(BIN_DIR)/test_patterns \
-	$(BIN_DIR)/test_metadata \
-	$(BIN_DIR)/test_globals \
-	$(BIN_DIR)/test_serialization \
-	$(BIN_DIR)/test_error_handling \
-	$(BIN_DIR)/test_memory \
-	$(BIN_DIR)/test_rules_load \
-	$(BIN_DIR)/test_rules_category \
-	$(BIN_DIR)/test_performance \
-	$(BIN_DIR)/test_functionality \
-	$(BIN_DIR)/test_edge_cases \
-	$(BIN_DIR)/test_integration
+TEST_TARGETS = $(BIN_DIR)/test_basic_compile $(BIN_DIR)/test_patterns $(BIN_DIR)/test_metadata $(BIN_DIR)/test_globals $(BIN_DIR)/test_serialization $(BIN_DIR)/test_error_handling $(BIN_DIR)/test_memory $(BIN_DIR)/test_rules_load $(BIN_DIR)/test_rules_category $(BIN_DIR)/test_performance $(BIN_DIR)/test_functionality $(BIN_DIR)/test_edge_cases $(BIN_DIR)/test_integration $(BIN_DIR)/test_file_formats
 
 # Test sources
 TEST_BASIC_COMPILE_SRC = $(SRC_DIR)/test_basic_compile.cpp
@@ -107,6 +94,12 @@ $(BIN_DIR)/test_edge_cases: $(TEST_EDGE_CASES_SRC) | $(BIN_DIR)
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -o $@ $< $(LDFLAGS)
 
 $(BIN_DIR)/test_integration: $(TEST_INTEGRATION_SRC) | $(BIN_DIR)
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -o $@ $< $(LDFLAGS)
+
+# File formats test
+TEST_FILE_FORMATS_SRC = $(SRC_DIR)/test_file_formats.cpp
+
+$(BIN_DIR)/test_file_formats: $(TEST_FILE_FORMATS_SRC) | $(BIN_DIR)
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -o $@ $< $(LDFLAGS)
 
 # Run all tests
@@ -182,6 +175,9 @@ test-edge-cases: $(BIN_DIR)/test_edge_cases
 
 test-integration: $(BIN_DIR)/test_integration
 	./$(BIN_DIR)/test_integration
+
+test-file-formats: $(BIN_DIR)/test_file_formats
+	./$(BIN_DIR)/test_file_formats
 
 # Run demo
 run: $(DEMO_TARGET)
